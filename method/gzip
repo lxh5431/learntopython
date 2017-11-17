@@ -1,0 +1,11 @@
+
+def uncompress(response):
+	infile = StringIO.StringIO(response)
+	dst = StringIO.StringIO()
+	decompress = zlib.decompressobj()
+	data = infile.read (1024)
+	while data:
+		dst.write(decompress.decompress(data,0,len(data)))
+		data = infile.read(1024)
+	dst.write(decompress.flush())
+	return dst.getvalue()
